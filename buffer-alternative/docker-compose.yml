@@ -1,0 +1,25 @@
+# Optional: run as docker service instead of cron
+# Cheaper alternative: just use cron (see README)
+#
+# Usage:
+#   1. Copy .env.example to .env, fill in tokens
+#   2. Create queue.json (see queue.json.example)
+#   3. docker-compose up -d
+#   4. Container polls queue every 5 min
+
+services:
+  publisher:
+    image: python:3.11-slim
+    container_name: ig-publisher
+    working_dir: /app
+    volumes:
+      - ./:/app
+    env_file: .env
+    command: >
+      sh -c "
+        while true; do
+          python3 queue_watcher.py;
+          sleep 300;
+        done
+      "
+    restart: unless-stopped
