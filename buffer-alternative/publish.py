@@ -24,6 +24,7 @@ import argparse
 import json
 import os
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -40,14 +41,39 @@ IG_ACCOUNT_ID = os.environ.get("IG_ACCOUNT_ID", "")
 API = "https://graph.facebook.com/v22.0"
 
 
-def post(path, data):
-    """POST helper — sends form-encoded body to Meta Graph API."""
+def post(path, data, max_retries=3):
+    """POST helper — sends form-encoded body to Meta Graph API.
+
+    Retries on transient errors (5xx, timeouts) with exponential backoff.
+    Does NOT retry on 4xx (bad request / auth = permanent).
+    """
     data["access_token"] = IG_TOKEN
     body = urllib.parse.urlencode(data).encode()
-    req = urllib.request.Request(f"{API}/{path}", data=body, method="POST")
-    req.add_header("Content-Type", "application/x-www-form-urlencoded")
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read())
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(f"{API}/{path}", data=body, method="POST")
+            req.add_header("Content-Type", "application/x-www-form-urlencoded")
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            last_err = e
+            # 4xx = client error (bad token, malformed request) — do not retry
+            if 400 <= e.code < 500:
+                raise
+            # 5xx = server error — retry with backoff
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # 1s, 2s, 4s
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            last_err = e
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            raise
+    if last_err:
+        raise last_err
 
 
 def wait_finished(container_id, max_wait=60):
