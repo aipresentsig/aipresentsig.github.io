@@ -9,7 +9,6 @@ Building a self-hosted AI stack on a €280 NUC. Free lead-magnets:
 ## Coming soon
 
 - **STACK** — docker-compose starter kit
-- **BUFFER** — 80-line IG-publisher code
 - **COST** — self-hosted cost-tracking snippet
 
 ## Follow the build
