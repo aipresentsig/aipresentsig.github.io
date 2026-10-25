@@ -4,42 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZeroClaw</title>
-<meta name="description" content="ZeroClaw is a build-in-public project about self-hosted AI agents, local LLMs and homelabs.">
+<meta name="description" content="ZeroClaw: build-in-public notes on self-hosted AI agents, local LLMs and homelabs. All channels and free downloads in one place.">
+<meta property="og:title" content="ZeroClaw - self-hosted AI agents, built in public">
+<meta property="og:description" content="Short videos and notes on local LLMs, Ollama and a small Proxmox homelab.">
 <style>
-body { font-family: system-ui, -apple-system, sans-serif; max-width: 720px; margin: 2rem auto; padding: 1.5rem; line-height: 1.6; color: #222; background: #fff; }
-h1 { color: #0A0F1A; border-bottom: 3px solid #5DD9FA; padding-bottom: 0.5rem; }
-h2 { color: #0A0F1A; margin-top: 2rem; }
-a { color: #0A0F1A; }
-footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #ddd; font-size: 0.9rem; color: #666; }
+:root {
+  --bg: #0A0F1A;
+  --panel: #111a2b;
+  --panel-hover: #16233a;
+  --line: #22324d;
+  --text: #e8eef7;
+  --muted: #93a4bd;
+  --accent: #5DD9FA;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+main { max-width: 520px; margin: 0 auto; padding: 40px 16px 32px; }
+.kicker {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+h1 { margin: 6px 0 8px; font-size: 34px; letter-spacing: -0.02em; }
+.intro { margin: 0 0 28px; color: var(--muted); font-size: 16px; }
+.links { display: grid; gap: 12px; }
+a.link {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--panel); color: var(--text); text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+a.link:hover, a.link:focus-visible { background: var(--panel-hover); border-color: var(--accent); outline: none; }
+.link .name { font-weight: 600; font-size: 16px; }
+.link .meta { display: block; color: var(--muted); font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+.link .arrow { color: var(--accent); font-size: 18px; flex: none; }
+a.link.free { border-color: var(--accent); }
+.badge {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+  background: var(--accent); color: var(--bg); font-size: 11px; font-weight: 700; vertical-align: 2px;
+}
+h2 { margin: 36px 0 8px; font-size: 15px; color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .06em; text-transform: uppercase; }
+p.small { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer a, p.small a { color: var(--text); }
 </style>
 </head>
 <body>
+<main>
+  <div class="kicker">ZeroClaw / local first</div>
+  <h1>ZeroClaw</h1>
+  <p class="intro">Self-hosted AI agents, built in public: local LLMs with Ollama, a small Proxmox homelab, and what each change really costs. A new short every day.</p>
 
-<h1>ZeroClaw</h1>
-<p>ZeroClaw is a build-in-public project about running AI agents on your own hardware: local language models with Ollama, a small Proxmox homelab, and the automations around it. We share short videos and notes about what works, what breaks and what it costs.</p>
+  <nav class="links" aria-label="ZeroClaw channels">
+    <a class="link" href="https://www.youtube.com/@zeroclawbuild">
+      <span><span class="name">YouTube Shorts</span><span class="meta">@zeroclawbuild</span></span><span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="link" href="https://www.instagram.com/zeroclaw.build/">
+      <span><span class="name">Instagram</span><span class="meta">@zeroclaw.build</span></span><span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="link" href="https://x.com/zeroclaw_build">
+      <span><span class="name">X</span><span class="meta">@zeroclaw_build</span></span><span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="link" href="https://bsky.app/profile/zeroclawbuild.bsky.social">
+      <span><span class="name">Bluesky</span><span class="meta">@zeroclawbuild.bsky.social</span></span><span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a class="link free" href="https://aipresentsig.github.io/homelab_starter_280eur.pdf">
+      <span><span class="name">Homelab starter kit <span class="badge">FREE</span></span><span class="meta">PDF &middot; 11 pages &middot; from parts to first self-hosted service</span></span><span class="arrow" aria-hidden="true">&darr;</span>
+    </a>
+  </nav>
 
-<h2>Where to follow</h2>
-<ul>
-  <li>Instagram: <a href="https://instagram.com/zeroclaw.build">@zeroclaw.build</a></li>
-  <li>X: <a href="https://x.com/zeroclaw_build">@zeroclaw_build</a></li>
-  <li>Bluesky: <a href="https://bsky.app/profile/zeroclawbuild.bsky.social">@zeroclawbuild.bsky.social</a></li>
-  <li>YouTube: <a href="https://www.youtube.com/@zeroclawbuild">@zeroclawbuild</a></li>
-</ul>
+  <h2>The ZeroClaw app</h2>
+  <p class="small">A private publishing tool used only by the ZeroClaw operator for ZeroClaw's own accounts; no sign-up, no service to other people. On YouTube it uploads ZeroClaw's own shorts after the operator approves each post, reads the channel's own statistics, and drafts replies to comments that the operator approves before they are posted (YouTube Data API and YouTube Analytics API via Google sign-in). The same approved videos go to ZeroClaw's own Instagram, X and Bluesky accounts through their official APIs.</p>
+  <p class="small"><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></p>
 
-<h2>The ZeroClaw app</h2>
-<p>The ZeroClaw app is a private publishing tool used only by the ZeroClaw operator for ZeroClaw's own accounts. It does not offer sign-up or any service to other people.</p>
-<ul>
-  <li><strong>YouTube:</strong> uploads ZeroClaw's own short videos to the ZeroClaw YouTube channel after the operator approves each post, reads the channel's own video statistics (views, likes, comments, watch time) to see which topics are useful to viewers, and drafts replies to comments on ZeroClaw's own videos that the operator approves before they are posted. It uses the YouTube Data API and the YouTube Analytics API through Google sign-in.</li>
-  <li><strong>Other channels:</strong> the same approved videos and texts are published to ZeroClaw's own Instagram, X and Bluesky accounts through their official APIs.</li>
-</ul>
-<p>Details: <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></p>
-
-<h2>Contact</h2>
-<p>Email: <a href="mailto:aipresents.ig@gmail.com">aipresents.ig@gmail.com</a></p>
-
-<footer>
-Operated by Sven Rollinger, Germany. &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a>
-</footer>
-
+  <footer>
+    Operated by Sven Rollinger, Germany &middot; <a href="mailto:aipresents.ig@gmail.com">aipresents.ig@gmail.com</a>
+  </footer>
+</main>
 </body>
 </html>
