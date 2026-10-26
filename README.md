@@ -1,10 +1,10 @@
 # ZeroClaw — Free Resources
 
-Building a self-hosted AI stack on a €280 NUC. Free lead-magnets:
+Building self-hosted AI agents on a small Proxmox homelab. Free downloads:
 
 ## Available
 
-- **[€280 Homelab Starter Kit](https://aipresentsig.github.io/homelab_starter_280eur.pdf)** — 4-weekend setup guide, from parts to first self-hosted service. 11 pages.
+- **[Homelab Starter Kit](https://aipresentsig.github.io/homelab_starter_kit.pdf)** — run local AI on a mini PC: Proxmox VE, LXC, Ollama, Open WebUI, Tailscale, backups. 14 pages.
 
 ## Coming soon
 
