@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab data · ZeroClaw</title>
+<meta name="description" content="The numbers behind every ZeroClaw Lab post: one measurement on our own hardware, with the exact command and the conditions at the time.">
+<meta property="og:title" content="ZeroClaw lab data">
+<meta property="og:description" content="Raw numbers, commands and conditions behind the ZeroClaw Lab posts: local LLMs on a mini PC, a gaming GPU and a MacBook Air.">
+<style>
+:root {
+  --bg: #0A0F1A;
+  --panel: #111a2b;
+  --line: #22324d;
+  --text: #e8eef7;
+  --muted: #93a4bd;
+  --accent: #5DD9FA;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+main { max-width: 680px; margin: 0 auto; padding: 40px 16px 32px; }
+.back { font-size: 14px; margin: 0 0 18px; }
+.back a { color: var(--muted); text-decoration: none; }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 6px 0 8px; font-size: 34px; letter-spacing: -0.02em; }
+.intro { margin: 0 0 8px; color: var(--muted); font-size: 16px; }
+h2 { margin: 40px 0 4px; font-size: 15px; color: var(--accent); font-family: var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+h3 { margin: 0 0 14px; font-size: 20px; letter-spacing: -0.01em; }
+p { margin: 0 0 12px; }
+.muted { color: var(--muted); }
+.card { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 16px 18px; margin: 12px 0 0; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+dt { color: var(--muted); font-size: 14px; }
+dd { margin: 0; font-size: 15px; min-width: 0; overflow-wrap: anywhere; }
+code { font-family: var(--mono); font-size: 13px; background: #0b1322; border: 1px solid var(--line); border-radius: 6px; padding: 1px 5px; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.big { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+.table-wrap { overflow-x: auto; margin: 12px 0 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 13px; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+ul { margin: 8px 0 0; padding-left: 20px; }
+li { margin: 0 0 6px; }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer a { color: var(--text); }
+@media (max-width: 480px) {
+  dl { grid-template-columns: 1fr; gap: 2px 0; }
+  dd { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <p class="back"><a href="./">&larr; ZeroClaw</a></p>
+  <div class="kicker">ZeroClaw / lab data</div>
+  <h1>Lab data</h1>
+  <p class="intro">The numbers behind every Lab post: one measurement on our own hardware, with the exact command and the conditions at the time. When the setup changes, the old number stays and the new one is added below it.</p>
+
+  <h2>Machines</h2>
+  <div class="card">
+    <dl>
+      <dt>Mini PC</dt>
+      <dd>Intel Core i3-N305, CPU only, Proxmox container, Ollama 0.30.6. Until 31 Oct 2026 the container saw 6 cores, was capped at 4 cores of CPU time and had 16 GB of RAM. Since 31 Oct: 8 cores, no cap, 24 GB.</dd>
+      <dt>Gaming PC</dt>
+      <dd>NVIDIA GeForce RTX 5070 Ti 16 GB, Windows, a separate Ollama 0.40.11.</dd>
+      <dt>MacBook Air</dt>
+      <dd>Apple M3, 16 GB, a separate Ollama 0.40.13.</dd>
+    </dl>
+  </div>
+
+  <h2>Lab #1 · 2 Nov 2026</h2>
+  <div class="card">
+    <h3>A 3B model on a mini PC, CPU only</h3>
+    <p><span class="big">7.35</span> <span class="muted">tokens/s eval rate</span></p>
+    <dl>
+      <dt>Model</dt><dd><code>llama3.2:3b</code> (Q4_K_M)</dd>
+      <dt>Command</dt><dd><code>ollama run llama3.2:3b --verbose "Explain what a DNS record is in three sentences."</code></dd>
+      <dt>Recorded</dt><dd>29 Oct 2026, 18:25 UTC, one run, model already loaded</dd>
+      <dt>Machine</dt><dd>Mini PC with the old setup: 6 cores visible, capped at 4, 16 GB (13 GB available)</dd>
+      <dt>Eval rate</dt><dd class="num">7.35 tokens/s (108 tokens)</dd>
+      <dt>Prompt eval rate</dt><dd class="num">56.43 tokens/s</dd>
+      <dt>Load duration</dt><dd class="num">266 ms</dd>
+    </dl>
+    <p class="note">The answer called A records mail records. That is MX; we corrected it on screen. Fast is not the same as right.</p>
+    <p class="note">Measured again on 1 Nov 2026 after the cap was removed (8 cores, 6 threads, same model and prompt, through the Ollama API): 14.80, 15.00 and 14.97 tokens/s in three runs.</p>
+  </div>
+
+  <h2>Race · 1 Nov 2026</h2>
+  <div class="card">
+    <h3>One prompt, three machines</h3>
+    <p class="muted">Model <code>llama3.2:3b</code> (Q4_K_M) on every machine, prompt <code>Write five sentences about home networks.</code> Tokens/s, Ollama eval rate.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Machine</th><th class="num">Best run</th><th class="num">Under load</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mini PC, i3-N305, CPU only</td><td class="num">14.30</td><td class="num">6.15</td></tr>
+          <tr><td>MacBook Air M3</td><td class="num">36.14</td><td class="num">33.90</td></tr>
+          <tr><td>RTX 5070 Ti</td><td class="num">289.01</td><td class="num">288.70</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="muted">
+      <li>Mini PC: best is one run after a 75 s pause (31 Oct); under load is the average over 10 min.</li>
+      <li>MacBook Air M3: after 90 s pauses 36.14, 30.91, 34.90; back to back 32.89, 33.87, 34.69; under load 180 s, 47 requests.</li>
+      <li>RTX 5070 Ti: after 90 s pauses 284.83, 268.24, 209.49; back to back 289.01, 288.90, 288.89; under load 180 s, 386 requests.</li>
+    </ul>
+    <p class="note">The GPU is about 20 times faster than the mini PC at best (289 vs 14.3) and about 47 times faster under load (289 vs 6.15).</p>
+    <p class="muted" style="margin-top:14px">What differs between the runs:</p>
+    <ul class="muted">
+      <li>Three Ollama versions: 0.30.6 on the mini PC, 0.40.11 on the gaming PC, 0.40.13 on the Mac.</li>
+      <li>The load phase ran 10 min on the mini PC and 3 min on the other two.</li>
+      <li>The Mac ran on battery. On the gaming PC a download ran during the load phase.</li>
+      <li>On the mini PC, requests 8 to 11 of the load phase are excluded because another client used the box at that time.</li>
+      <li>The Mac's model file has a different digest; the quantization is the same (Q4_K_M).</li>
+    </ul>
+  </div>
+
+  <h2>How we measure</h2>
+  <ul>
+    <li>Tokens/s means Ollama's eval rate, the generation speed. Prompt processing is listed separately.</li>
+    <li>One run unless stated otherwise. Times are UTC.</li>
+    <li>We keep the raw logs and terminal recordings for every number on this page.</li>
+    <li>Posts are made with AI from these measurements and approved by a human before they go out.</li>
+  </ul>
+
+  <footer>
+    <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a> &middot; <a href="impressum.html">Impressum</a><br>
+    Operated by Sven Rollinger, Germany
+  </footer>
+</main>
+</body>
+</html>
